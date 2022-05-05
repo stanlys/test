@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+    <style>
+        .wrapper{
+            margin: 50px auto;
+            height: 80vh;
+            max-width: 65vw;
+            border: 0.2vw solid rgb(20, 34, 43);
+            background-color: rgb(37, 40, 42);
+            border-radius: 0.5em;
+            display: grid;
+            grid-template-areas: 
+            "Slider Slider"
+            "Label Control";
+            row-gap: 1em;
+            padding: 2em 2em 0;
+        }
+        .slider{
+            grid-area: Slider;
+            width: 100%;
+            height: 60vh;
+            overflow: hidden;
+            display: flex;
+            margin: 0 auto;
+            border-radius: 1em;
+            border: 0.1em solid rgb(22, 27, 34);
+        }
+
+        .label{
+            grid-area: Label;
+            width: 50vw;
+            color: aliceblue;
+        }
+        .control{
+            padding-top: 1em;
+            grid-area: Control;
+            display: flex;
+            justify-content: flex-end;
+        }
+        span{
+            cursor: pointer;
+        }
+        .r1>span {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+}
+        .r1 {
+            position: absolute;
+            z-index: -1;
+             opacity: 0;
+           
+        }
+        .r1:not(:disabled):not(:checked)+label:hover::before {
+             border-color: #b3d7ff;
+            }
+
+            .r1+span::before {
+             content: '';
+                display: inline-block;
+                width: 1em;
+                height: 1em;
+                flex-shrink: 0;
+                flex-grow: 0;
+                border: 0.3em solid #71abfe;
+                border-radius: 50%;
+                margin-right: 0.5em;
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: 50% 50%;
+  }    
+  /* стили при наведении курсора на радио */
+  .r1:not(:disabled):not(:checked)+span:hover::before {
+    border-color: #b3d7ff;
+  }
+   /* стили для активной радиокнопки (при нажатии на неё) */
+   .r1:not(:disabled):active+span::before {
+    background-color: #b3d7ff;
+    border-color: #b3d7ff;
+  }
+  /* стили для радиокнопки, находящейся в состоянии checked */
+  .r1:checked+span::before {
+    border-color: #0b76ef;
+    background-color: #0b76ef;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+  }
+  /* стили для радиокнопки, находящейся в состоянии disabled */
+  .r1:disabled+span::before {
+    background-color: #e9ecef;
+  }
+
+/* для элемента input c type="radio" */
+.custom-radio>input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+/* для элемента label связанного с .custom-radio */
+.custom-radio>span {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+}
+
+/* создание в label псевдоэлемента  before со следующими стилями */
+.custom-radio>span::before {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid #adb5bd;
+  border-radius: 50%;
+  margin-right: 0.5em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+
+/* стили при наведении курсора на радио */
+.custom-radio>input:not(:disabled):not(:checked)+span:hover::before {
+  border-color: #b3d7ff;
+}
+
+/* стили для активной радиокнопки (при нажатии на неё) */
+.custom-radio>input:not(:disabled):active+span::before {
+  background-color: #b3d7ff;
+  border-color: #b3d7ff;
+}
+
+/* стили для радиокнопки, находящейся в фокусе */
+.custom-radio>input:focus+span::before {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* стили для радиокнопки, находящейся в фокусе и не находящейся в состоянии checked */
+.custom-radio>input:focus:not(:checked)+span::before {
+  border-color: #80bdff;
+}
+
+/* стили для радиокнопки, находящейся в состоянии checked */
+.custom-radio>input:checked+span::before {
+  border-color: #0b76ef;
+  background-color: #0b76ef;
+}
+
+/* стили для радиокнопки, находящейся в состоянии disabled */
+.custom-radio>input:disabled+span::before {
+  background-color: #e9ecef;
+}
+    </style>
+</head>
+<body>
+    <label class="custom-radio">
+        <input type="radio" name="color" value="indigo">
+        <span>Indigo</span>
+      </label>
+    <div class="wrapper">
+        <div class="slider">
+           <img src="" alt="">
+           <img src="" alt="">
+           <img src="" alt="">
+           <img src="" alt="">
+           <img src="" alt="">
+        </div>
+        <div class="label"> 
+            <label for="control1" id="label1">надпись 1</label>
+            <label for="control2" id="label2">надпись 2</label>
+            <label for="control3" id="label3">надпись 3</label>
+            <label for="control4" id="label4">надпись 4</label>
+            <label for="control5" id="label5">надпись 5</label>
+        </div>
+        <label class="control">
+            <input type="radio" name="color" id="r1" class="r1"><span></span>
+            <input type="radio" name="color" id="" class="r1"><span></span>
+            <input type="radio" name="color" id="" class="r1"><span></span>
+            <input type="radio" name="color" id="" class="r1"><span></span>
+            <input type="radio" name="color" id="" class="r1"><span></span>
+        </label>
+    </div>
+</body>
+</html>

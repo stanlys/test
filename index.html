@@ -1,189 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slider</title>
-    <style>
-        .wrapper{
-            margin: 50px auto;
-            height: 80vh;
-            max-width: 65vw;
-            border: 0.2vw solid rgb(20, 34, 43);
-            background-color: rgb(37, 40, 42);
-            border-radius: 0.5em;
-            display: grid;
-            grid-template-areas: 
-            "Slider Slider"
-            "Label Control";
-            row-gap: 1em;
-            padding: 2em 2em 0;
-        }
-        .slider{
-            grid-area: Slider;
-            width: 100%;
-            height: 60vh;
-            overflow: hidden;
-            display: flex;
-            margin: 0 auto;
-            border-radius: 1em;
-            border: 0.1em solid rgb(22, 27, 34);
-        }
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slider</title>
+  <style>
+    /* .r1>span {
+      display: inline-flex;
+      align-items: center;
+      user-select: none;
+    }
 
-        .label{
-            grid-area: Label;
-            width: 50vw;
-            color: aliceblue;
-        }
-        .control{
-            padding-top: 1em;
-            grid-area: Control;
-            display: flex;
-            justify-content: flex-end;
-        }
-        span{
-            cursor: pointer;
-        }
-        .r1>span {
-  display: inline-flex;
-  align-items: center;
-  user-select: none;
-}
-        .r1 {
-            position: absolute;
-            z-index: -1;
-             opacity: 0;
-           
-        }
-        .r1:not(:disabled):not(:checked)+label:hover::before {
-             border-color: #b3d7ff;
-            }
+    .r1 {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
 
-            .r1+span::before {
-             content: '';
-                display: inline-block;
-                width: 1em;
-                height: 1em;
-                flex-shrink: 0;
-                flex-grow: 0;
-                border: 0.3em solid #71abfe;
-                border-radius: 50%;
-                margin-right: 0.5em;
-                background-repeat: no-repeat;
-                background-position: center center;
-                background-size: 50% 50%;
-  }    
-  /* стили при наведении курсора на радио */
-  .r1:not(:disabled):not(:checked)+span:hover::before {
-    border-color: #b3d7ff;
-  }
-   /* стили для активной радиокнопки (при нажатии на неё) */
-   .r1:not(:disabled):active+span::before {
-    background-color: #b3d7ff;
-    border-color: #b3d7ff;
-  }
-  /* стили для радиокнопки, находящейся в состоянии checked */
-  .r1:checked+span::before {
-    border-color: #0b76ef;
-    background-color: #0b76ef;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
-  }
-  /* стили для радиокнопки, находящейся в состоянии disabled */
-  .r1:disabled+span::before {
-    background-color: #e9ecef;
-  }
+    }
 
-/* для элемента input c type="radio" */
-.custom-radio>input {
-  position: absolute;
-  z-index: -1;
-  opacity: 0;
-}
+    .r1:not(:disabled):not(:checked)+label:hover::before {
+      border-color: #b3d7ff;
+    }
 
-/* для элемента label связанного с .custom-radio */
-.custom-radio>span {
-  display: inline-flex;
-  align-items: center;
-  user-select: none;
-}
+    .r1+span::before {
+      content: '';
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      flex-shrink: 0;
+      flex-grow: 0;
+      border: 0.3em solid #71abfe;
+      border-radius: 50%;
+      margin-right: 0.5em;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 50% 50%;
+    }
 
-/* создание в label псевдоэлемента  before со следующими стилями */
-.custom-radio>span::before {
-  content: '';
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  flex-shrink: 0;
-  flex-grow: 0;
-  border: 1px solid #adb5bd;
-  border-radius: 50%;
-  margin-right: 0.5em;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 50% 50%;
-}
+    .r1:not(:disabled):not(:checked)+span:hover::before {
+      border-color: #b3d7ff;
+    }
 
-/* стили при наведении курсора на радио */
-.custom-radio>input:not(:disabled):not(:checked)+span:hover::before {
-  border-color: #b3d7ff;
-}
+    .r1:not(:disabled):active+span::before {
+      background-color: #b3d7ff;
+      border-color: #b3d7ff;
+    }
 
-/* стили для активной радиокнопки (при нажатии на неё) */
-.custom-radio>input:not(:disabled):active+span::before {
-  background-color: #b3d7ff;
-  border-color: #b3d7ff;
-}
+    .r1:checked+span::before {
+      border-color: #0b76ef;
+      background-color: #0b76ef;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+    }
 
-/* стили для радиокнопки, находящейся в фокусе */
-.custom-radio>input:focus+span::before {
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
+    .r1:disabled+span::before {
+      background-color: #e9ecef;
+    }
+    .custom-radio>input {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+    }
 
-/* стили для радиокнопки, находящейся в фокусе и не находящейся в состоянии checked */
-.custom-radio>input:focus:not(:checked)+span::before {
-  border-color: #80bdff;
-}
+    .custom-radio>span {
+      display: inline-flex;
+      align-items: center;
+      user-select: none;
+    }
 
-/* стили для радиокнопки, находящейся в состоянии checked */
-.custom-radio>input:checked+span::before {
-  border-color: #0b76ef;
-  background-color: #0b76ef;
-}
+    .custom-radio>span::before {
+      content: '';
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      flex-shrink: 0;
+      flex-grow: 0;
+      border: 1px solid #adb5bd;
+      border-radius: 50%;
+      margin-right: 0.5em;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 50% 50%;
+    }
 
-/* стили для радиокнопки, находящейся в состоянии disabled */
-.custom-radio>input:disabled+span::before {
-  background-color: #e9ecef;
-}
-    </style>
+    .custom-radio>input:not(:disabled):not(:checked)+span:hover::before {
+      border-color: #b3d7ff;
+    }
+
+    .custom-radio>input:not(:disabled):active+span::before {
+      background-color: #b3d7ff;
+      border-color: #b3d7ff;
+    }
+    .custom-radio>input:focus+span::before {
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    .custom-radio>input:focus:not(:checked)+span::before {
+      border-color: #80bdff;
+    }
+
+    .custom-radio>input:checked+span::before {
+      border-color: #0b76ef;
+      background-color: #0b76ef;
+    }
+
+
+    .custom-radio>input:disabled+span::before {
+      background-color: #e9ecef;
+    } */
+
+
+    .wrapper {
+      margin: 50px auto;
+      height: 80vh;
+      max-width: 65vw;
+      border: 0.2vw solid rgb(20, 34, 43);
+      background-color: rgb(37, 40, 42);
+      border-radius: 0.5em;
+      display: grid;
+      grid-template-areas:
+        "Slider Slider"
+        "Label Control";
+      row-gap: 1em;
+      /*padding: 2em 2em 0;*/
+    }
+
+    .slider {
+      grid-area: Slider;
+      width: 800px;
+      height: 60vh;
+      display: flex;
+      overflow: hidden;
+      margin: 0 auto;
+      border-radius: 1em;
+      border: 0.1em solid gray;
+    }
+
+    .label {
+      grid-area: Label;
+      width: 50vw;
+      color: aliceblue;
+    }
+
+    .control {
+      padding-top: 1em;
+      grid-area: Control;
+      display: flex;
+      position: absolute;
+      justify-content: flex-end;
+    }
+
+    label {
+      cursor: pointer;
+      /*margin: 5px;*/
+      opacity: .5;
+      transition: all .5 ease;
+    }
+
+
+    .forlabel {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      vertical-align: middle;
+      width: 35px;
+      height: 35px;
+      cursor: pointer;
+    }
+
+    /*
+    .myradio {
+      height: 10px;
+      width: 10px;
+      border-radius: 15px;
+      border: .2rem solid #0b76ef;
+      background-color: #0b76ef;
+      color: aliceblue;
+    }
+
+    .myradio:checked .forlabel {
+      background-color: red;
+    }
+
+    .forlabel:checked {
+      background-color: red;
+    }
+
+    .forlabel:hover>label {
+      background-color: #FFFFFF;
+      color: #FFFFFF;
+      border-color: #FFFFFF;
+      opacity: .8;
+    }
+
+    input[name="slideritem"] {}
+
+    .item {
+      width: 800px;
+      transition: all 1s ease-out;
+    }
+*/
+    #r1:checked~.slider>.slider1 {
+      margin-left: 0px;
+    }
+
+    #r2:checked~.slider1 {
+      margin-left: -800px;
+    }
+
+    #r3:checked~.slider1 {
+      margin-left: -1600px;
+    }
+
+    #r4:checked~.slider1 {
+      margin-left: -2400px
+    }
+
+    #r5:checked~.slider1 {
+      margin-left: -3200px;
+    }
+
+    .item img {
+      width: 880px;
+      height: 300px;
+    }
+  </style>
 </head>
+
 <body>
-    <label class="custom-radio">
-        <input type="radio" name="color" value="indigo">
-        <span>Indigo</span>
-      </label>
-    <div class="wrapper">
-        <div class="slider">
-           <img src="" alt="">
-           <img src="" alt="">
-           <img src="" alt="">
-           <img src="" alt="">
-           <img src="" alt="">
-        </div>
-        <div class="label"> 
-            <label for="control1" id="label1">надпись 1</label>
-            <label for="control2" id="label2">надпись 2</label>
-            <label for="control3" id="label3">надпись 3</label>
-            <label for="control4" id="label4">надпись 4</label>
-            <label for="control5" id="label5">надпись 5</label>
-        </div>
-        <label class="control">
-            <input type="radio" name="color" id="r1" class="r1"><span></span>
-            <input type="radio" name="color" id="" class="r1"><span></span>
-            <input type="radio" name="color" id="" class="r1"><span></span>
-            <input type="radio" name="color" id="" class="r1"><span></span>
-            <input type="radio" name="color" id="" class="r1"><span></span>
-        </label>
+
+  <div class="wrapper">
+
+    <div class="slider">
+      <input type="radio" name="slideritem" id="r1" class="r1">
+      <input type="radio" name="slideritem" id="r2" class="r1">
+      <input type="radio" name="slideritem" id="r3" class="r1">
+      <input type="radio" name="slideritem" id="r4" class="r1">
+      <input type="radio" name="slideritem" id="r5" class="r1">
+
+      <div class="item slider1"><img src="img/1.jpeg" alt="1"></div>
+      <div class="item"><img src="img/2.jpeg" alt="2"></div>
+      <div class="item"><img src="img/1.jpeg" alt="3"></div>
+      <div class="item"><img src="img/2.jpeg" alt="4"></div>
+      <div class="item"><img src="img/1.jpeg" alt="5"></div>
+
     </div>
+    <div class="label">
+      <span>Подпись 1</span>
+      <span>Подпись 2</span>
+      <span>Подпись 3</span>
+      <span>Подпись 4</span>
+      <span>Подпись 5</span>
+    </div>
+    <div class="control">
+      <div class="forlabel"><label for="r1" id="label1" class="myradio">&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
+      <div class="forlabel"><label for="r2" id="label2" class="myradio">&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
+      <div class="forlabel"><label for="r5" id="label5" class="myradio">&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
+      <div class="forlabel"><label for="r3" id="label3" class="myradio">&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
+      <div class="forlabel"><label for="r4" id="label4" class="myradio">&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
+    </div>
+  </div>
 </body>
+
 </html>

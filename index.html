@@ -7,133 +7,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Slider</title>
   <style>
-    /* .r1>span {
-      display: inline-flex;
-      align-items: center;
-      user-select: none;
+    *{
+      font-family: Arial, Helvetica, sans-serif;
     }
-
-    .r1 {
-      position: absolute;
-      z-index: -1;
-      opacity: 0;
-
-    }
-
-    .r1:not(:disabled):not(:checked)+label:hover::before {
-      border-color: #b3d7ff;
-    }
-
-    .r1+span::before {
-      content: '';
-      display: inline-block;
-      width: 1em;
-      height: 1em;
-      flex-shrink: 0;
-      flex-grow: 0;
-      border: 0.3em solid #71abfe;
-      border-radius: 50%;
-      margin-right: 0.5em;
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: 50% 50%;
-    }
-
-    .r1:not(:disabled):not(:checked)+span:hover::before {
-      border-color: #b3d7ff;
-    }
-
-    .r1:not(:disabled):active+span::before {
-      background-color: #b3d7ff;
-      border-color: #b3d7ff;
-    }
-
-    .r1:checked+span::before {
-      border-color: #0b76ef;
-      background-color: #0b76ef;
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
-    }
-
-    .r1:disabled+span::before {
-      background-color: #e9ecef;
-    }
-    .custom-radio>input {
-      position: absolute;
-      z-index: -1;
-      opacity: 0;
-    }
-
-    .custom-radio>span {
-      display: inline-flex;
-      align-items: center;
-      user-select: none;
-    }
-
-    .custom-radio>span::before {
-      content: '';
-      display: inline-block;
-      width: 1em;
-      height: 1em;
-      flex-shrink: 0;
-      flex-grow: 0;
-      border: 1px solid #adb5bd;
-      border-radius: 50%;
-      margin-right: 0.5em;
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: 50% 50%;
-    }
-
-    .custom-radio>input:not(:disabled):not(:checked)+span:hover::before {
-      border-color: #b3d7ff;
-    }
-
-    .custom-radio>input:not(:disabled):active+span::before {
-      background-color: #b3d7ff;
-      border-color: #b3d7ff;
-    }
-    .custom-radio>input:focus+span::before {
-      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-    }
-
-    .custom-radio>input:focus:not(:checked)+span::before {
-      border-color: #80bdff;
-    }
-
-    .custom-radio>input:checked+span::before {
-      border-color: #0b76ef;
-      background-color: #0b76ef;
-    }
-
-
-    .custom-radio>input:disabled+span::before {
-      background-color: #e9ecef;
-    } */
-
-
-    .wrapper {
-      margin: 3vh auto;
-      padding-top: 2vh;
-      max-width: 65vw;
-      border: 0.2vw solid rgb(20, 34, 43);
-      background-color: rgb(37, 40, 42);
-      border-radius: 0.5em;
-      display: grid;
-      grid-template-areas:
-        "Slider Slider"
-        "Label Control";
-      row-gap: 1em;
-      /*padding: 2em 2em 0;*/
-    }
-
+  
     .slider {
       grid-area: Slider;
       width: 55vw;
+      max-height: 65vh;
       display: flex;
       overflow: hidden;
       margin: 0 auto;
       border-radius: 1em;
       border: 0.1em solid gray;
+      box-sizing: border-box;
+      align-items: center;
     }
 
     .caption {
@@ -150,11 +38,14 @@
       padding-top: 1em;
       grid-area: Control;
       display: flex;
-      /*position: absolute;*/
+      height: 5vh;
+      width:20vw;
       justify-content: flex-end;
+      align-items: center;
     }
 
     label {
+      /*font-size: .7em;*/
       cursor: pointer;
       opacity: .6;
       transition: all 5 ease;
@@ -166,15 +57,15 @@
       justify-content: center;
       text-align: center;
       vertical-align: middle;
-      width: 3vw;
+      width: 5vw;
       height: 5vh;
       cursor: pointer;
     }
 
     
     .myradio {
-      height: 3vw;
-      width: 3vw;
+      height: 1em;
+      width: 1em;
       border-radius: 1rem;
       border: .2rem solid #0b76ef;
       background-color: #0b76ef;
@@ -194,23 +85,28 @@
     }
 
     #r1:checked~.slider .slider1{
-      margin-left: 0px;
+      margin-left: 0;
+      transition: all 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
     }
 
     #r2:checked~.slider .slider1{
       margin-left: -55vw;
+      transition: all 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
     }
 
     #r3:checked~.slider .slider1 {
       margin-left: -110vw;
+      transition: all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
     }
 
     #r4:checked~.slider .slider1 {
       margin-left: -165vw;
+      transition: all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
     }
 
     #r5:checked~.slider .slider1 {
       margin-left: -220vw;
+      transition: all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
     }
 
 
@@ -219,7 +115,8 @@
       margin-top: 2vh;
     }
     input{
-      visibility: hidden;
+      /*visibility: hidden;*/
+      display: none;
     }
     #r1:checked~.control #label1{
       border-color: white; 
@@ -240,6 +137,7 @@
     #r5:checked~.control #label5{
       border-color: white;
       background-color: rgb(37, 40, 42);
+      
     }
 
     #r1:checked:hover{
@@ -257,27 +155,81 @@
     #r1:checked~.caption #caption1{
       transform: translateY(0);
       opacity: 1;
+      transition: all 1.5s ease-out 0s;
     }
 
     #r2:checked~.caption #caption2{
       transform: translateY(-2em);
       opacity: 1;
       animation: ease-in-out 2s;
+      transition: all 1.5s ease-out 0s;
     }
     #r3:checked~.caption #caption3{
       transform: translateY(-4em);
       opacity: 1;
-      animation: ease-in-out 2s;
+      transition: all 1.5s ease-out 0s;
     }
     #r4:checked~.caption #caption4{
       transform: translateY(-6em);
       opacity: 1;
-      animation: ease-in-out 2s;
+      transition: all 1.5s ease-out 0s;
     }
     #r5:checked~.caption #caption5{
       transform: translateY(-8em);
       opacity: 1;
-      animation: ease-in-out 2s;
+      transition: all 1.5s ease-out 0s;
+    }
+    @media screen and (min-width:769px){
+      .wrapper {
+      margin: 3vh auto;
+      padding-top: 2vh;
+      max-width: 65vw;
+      max-height: 80vh;
+      border: 0.2vw solid rgb(20, 34, 43);
+      background-color: rgb(37, 40, 42);
+      border-radius: 0.5em;
+      display: grid;
+      grid-template-areas:
+        "Slider Slider"
+        "Label Control";
+      row-gap: 1em;
+    }
+    }
+
+    @media screen and (max-width:768px){
+      .wrapper {
+      margin: 1vh auto;
+      padding-top: 1vh;
+      max-width: 60vw;
+      max-height: 65vh;
+      border: 0.2vw solid rgb(20, 34, 43);
+      background-color: rgb(37, 40, 42);
+      border-radius: 0.5em;
+      display: grid;
+      grid-template-areas:
+        "Slider"
+        "Control"
+        "Label ";
+      /*padding: 2em 2em 0;*/
+    } 
+    label{
+      font-size: x-small;
+    }
+
+    .control{
+      margin:0 auto;
+      justify-content: center;
+      padding-top: .2em;
+    }
+
+    .caption {
+      grid-area: Label;
+      padding-left: 2vw;
+      width: 50vw;
+      font-size: small;
+    }
+
+    
     }
 @keyframes captionscale {
   from{
@@ -289,7 +241,16 @@ to{
     transform: scale(1);
 }
   
+
 }
+
+@media screen and (max-width:480px){
+  label{
+      font-size: .1em;
+    }
+
+}
+
 /*
     .adaptivny-slayder {
   position: relative;
@@ -377,16 +338,16 @@ to{
     <div class="slider">
       <div class="item slider1"><img src="img/1.jpeg" alt="1"></div>
       <div class="item"><img src="img/2.jpeg" alt="2"></div>
-      <div class="item"><img src="img/1.jpeg" alt="3"></div>
-      <div class="item"><img src="img/2.jpeg" alt="4"></div>
-      <div class="item"><img src="img/1.jpeg" alt="5"></div>
+      <div class="item"><img src="img/3.jpg" alt="3"></div>
+      <div class="item"><img src="img/4.jpg" alt="4"></div>
+      <div class="item"><img src="img/5.png" alt="5"></div>
       </div>
       <div class="caption">
-      <p class="label" id="caption1">Подпись мему 1</p>
-      <p class="label" id="caption2">Подпись мему 2</p>
-      <p class="label" id="caption3">Подпись мему 3</p>
-      <p class="label" id="caption4">Подпись мему 4</p>
-      <p class="label" id="caption5">Подпись мему 5</p>
+      <p class="label" id="caption1">Java Script</p>
+      <p class="label" id="caption2">CSS in JS</p>
+      <p class="label" id="caption3">JS anywhere</p>
+      <p class="label" id="caption4">Frontend Developer work</p>
+      <p class="label" id="caption5">Hello Stackoverflow</p>
     </div>
     <div class="control">
       <div class="forlabel"><label for="r1" id="label1" class="myradio">&nbsp;&nbsp;&nbsp;&nbsp;</label></div>

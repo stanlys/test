@@ -49,8 +49,9 @@
       cursor: pointer;
       opacity: .6;
       transition: all 5 ease;
+      display: block;
+      width: 10px;
     }
-
 
     .forlabel {
       align-items: center;
@@ -62,28 +63,71 @@
       cursor: pointer;
     }
 
-    
+   
     .myradio {
-      height: 1em;
-      width: 1em;
+      height: 2.5em;
+      width: 2.5em;
+      margin: 0.5em auto;
+       /*
       border-radius: 1rem;
       border: .2rem solid #0b76ef;
       background-color: #0b76ef;
-      color: aliceblue;
+      color: aliceblue;*/
     }
 
+    .checkbox__off{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0.2em auto;
+      width: 1.1em;
+      height: 1.1em;
+      background-image: url("img/UnChecked.svg");
+    }
+/*
     .forlabel:hover>label {
       background-color: #FFFFFF;
       color: #FFFFFF;
       border-color: #FFFFFF;
       opacity: 1;
     }
-
+*/
     .item {
       width: 55vw;
       transition: all 1s ease-out;
     }
-
+    #r1:hover~.control #label1>.checkbox__off{
+      background-image: url("img/UnChecked-hover.svg");
+    }
+    #r1:checked~.control #label1>.checkbox__off{
+      background-image: url("img/Checked.svg");
+    }
+    #r1:checked~.control #label1:hover>.checkbox__off{
+      background-image: url("img/Checked1.svg");
+    }
+    #r1~.control #label1:hover>.checkbox__off{
+      background-image: url("img/UnChecked-hover.svg");
+    }
+    #r2:checked~.control #label2>.checkbox__off{
+      background-image: url("img/Checked.svg");
+    }
+    #r2:checked~.control #label2:hover>.checkbox__off{
+      background-image: url("img/Checked1.svg");
+    }
+    #r3:checked~.control #label3>.checkbox__off{
+      background-image: url("img/Checked.svg");
+    }
+    #r4:checked~.control #label4>.checkbox__off{
+      background-image: url("img/Checked.svg");
+    }
+    #r5:checked~.control #label5>.checkbox__off{
+      background-image: url("img/Checked.svg");
+    }
+    /*
+    #r1:checked~.control .checkbox__off{
+      background-image: url("img/Checked.svg");
+    }
+*/
     #r1:checked~.slider .slider1{
       margin-left: 0;
       transition: all 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
@@ -109,15 +153,14 @@
       transition: all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
     }
 
-
     .item img {
       width: 55vw;
       margin-top: 2vh;
     }
     input{
-      /*visibility: hidden;*/
       display: none;
     }
+    /*
     #r1:checked~.control #label1{
       border-color: white; 
       background-color: rgb(37, 40, 42);
@@ -137,7 +180,6 @@
     #r5:checked~.control #label5{
       border-color: white;
       background-color: rgb(37, 40, 42);
-      
     }
 
     #r1:checked:hover{
@@ -151,7 +193,7 @@
     .label{
       opacity: 0;
     }
-
+*/
     #r1:checked~.caption #caption1{
       transform: translateY(0);
       opacity: 1;
@@ -350,11 +392,11 @@ to{
       <p class="label" id="caption5">Hello Stackoverflow</p>
     </div>
     <div class="control">
-      <div class="forlabel"><label for="r1" id="label1" class="myradio">&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
-      <div class="forlabel"><label for="r2" id="label2" class="myradio">&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
-      <div class="forlabel"><label for="r3" id="label3" class="myradio">&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
-      <div class="forlabel"><label for="r4" id="label4" class="myradio">&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
-      <div class="forlabel"><label for="r5" id="label5" class="myradio">&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
+      <div class="forlabel"><label for="r1" id="label1" class="myradio"><div class="checkbox__off"></div></label></div>
+      <div class="forlabel"><label for="r2" id="label2" class="myradio"><div class="checkbox__off"></div></label></div>
+      <div class="forlabel" id="idforlabel"><label for="r3" id="label3" class="myradio"><div class="checkbox__off"></div></label></div>
+      <div class="forlabel"><label for="r4" id="label4" class="myradio"><div class="checkbox__off"></div></label></div>
+      <div class="forlabel"><label for="r5" id="label5" class="myradio"><div class="checkbox__off"></div></label></div>
     </div>
   </div>
 </body>

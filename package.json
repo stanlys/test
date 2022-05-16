@@ -1,7 +1,8 @@
 {
-  "name": "slider",
+  "name": "testing-everyone",
   "version": "1.0.0",
   "description": "html css",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "test"
@@ -12,5 +13,16 @@
     "css"
   ],
   "author": "stanlys <stanlys@yandex.ru>",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stanlys/test.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stanlys/test/issues"
+  },
+  "homepage": "https://github.com/stanlys/test#readme",
+  "dependencies": {
+    "chalk": "^5.0.1"
+  }
 }

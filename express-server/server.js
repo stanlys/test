@@ -41,8 +41,6 @@ app.get('/projects', (req,res) =>{
 });
 
 app.post('/projects', (req, res) =>{
-  
-  console.log('------------', req);
   let new_project ={
     id: Date.now(),
     name: req.body.name
@@ -61,7 +59,6 @@ app.put('/projects/:id', (req,res)=>{
 })
 
 app.get('/projects/:id', (req,res) =>{
-  //res.send(req.params);
   const id = Number(req.params.id);
   let project = projects.find(el => el.id == id);
   if (id>=projects.length) res.send('Sorry, but I am not found this project');

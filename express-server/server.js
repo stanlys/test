@@ -3,39 +3,13 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { default as mongodb } from 'mongodb';
 let MongoClient = mongodb.MongoClient;
-let ObjectID = mongodb.ObjectId;
-//const express = require('express');
+export let ObjectID = mongodb.ObjectId;
 
 let app = express();
 let db;
-
-
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
-
-let projects = [
-  {
-    id: 1,
-    name: 'Смоленскэнерго',
-  },
-  {
-    id: 2,
-    name: 'Рязаньэнерго',
-  }, 
-  {
-    id: 3,
-    name: 'Костромаэнерго',
-  },
-  {
-    id: 4,
-    name: 'Орелэнерго',
-  },
-  {
-    id: 5,
-    name: 'Тулэнерго',
-  },
-];
 
 app.get('/', (req, res) =>{
   res.send(' -> Hello from Express <-');
@@ -60,18 +34,32 @@ app.post('/projects', (req, res) =>{
     if (err) {console.error(err.message); return res.sendStatus(500);}
     res.send(new_project);
   });
-  //projects.push(new_project);
-  
 });
 
-app.put('/projects/:id', (req,res)=>{
-  const id = Number(req.params.id);
-  let project = projects.find(el => el.id == id);
-  if (id>=projects.length) res.send('Sorry, but I am not found this project');
-  const project_last_name = project.name;
-  project.name = req.body.name;
-  res.send(`Вы обновили ${project_last_name} на ${project.name} `);
+app.put('/projects/:id', (req, res)=>{
+  db.collection('projects').updateOne({_id: ObjectID(req.params.id)},
+      {$set: {name: req.body.name}}, 
+      (err, result) =>{
+        if (err) {
+          console.error(err.message); 
+          return res.sendStatus(500);
+        }
+        res.send(`UPDATE ${req.params.id} to ${ req.body.name}`);
+        res.sendStatus(200);
+  });
 })
+
+app.delete('/projects/:id', (req, res)=>{
+  db.collection('projects').deleteOne({_id: ObjectID(req.params.id)},
+  (err,result) => {
+    if (err) {
+      console.error(err.message); 
+      return res.sendStatus(500);
+    }
+    res.send(`${result.name} was Delete!`);
+    res.sendStatus(200);
+  })
+});
 
 app.get('/projects/:id', (req,res) =>{
   const id = ObjectID(req.params.id);
@@ -86,9 +74,7 @@ app.get('/projects/:id', (req,res) =>{
 
 });
 
-
-
-MongoClient.connect('mongodb://127.0.0.1:27017/projects', (err, database)=>{
+ MongoClient.connect('mongodb://127.0.0.1:27017/projects', (err, database)=>{
   if (err) return console.error(err.message);
   db = database.db('projects');
   app.listen(3030, ()=>{
